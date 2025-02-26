@@ -9,7 +9,7 @@ import Home from './components/Home';
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 transition-all duration-300">
+    <div className="min-h-screen dark:bg-gray-800 text-gray-900 transition-all duration-300">
       <Navbar />
       <div className="container mx-auto p-4">
         <Routes>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="bg-gray-900 min-h-screen text-white transition-all duration-300">
+    <div className="dark:bg-gray-800 min-h-screen text-white transition-all duration-300">
       <section className="flex flex-col items-center justify-center text-center py-20 px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fadeIn">
           Organize Your Thoughts, Effortlessly

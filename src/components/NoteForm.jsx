@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../config';
 
 const NoteForm = ({ onNoteAdded }) => {
   const [title, setTitle] = useState('');
@@ -7,7 +8,7 @@ const NoteForm = ({ onNoteAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`, {
+    const response = await fetch(`${API_BASE_URL}/api/notes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

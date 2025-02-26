@@ -1,9 +1,9 @@
 import React from 'react';
-
+import API_BASE_URL from '../config';
 const NoteList = ({ notes, onNoteUpdated, onNoteDeleted }) => {
   const handleDelete = async (id) => {
 
-    const response = await fetch(  `${import.meta.env.VITE_API_URL}/api/notes/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/notes/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     });
