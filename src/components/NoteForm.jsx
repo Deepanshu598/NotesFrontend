@@ -5,22 +5,33 @@ const NoteForm = ({ onNoteAdded }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${API_BASE_URL}/api/notes`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({ title, content, category })
-    });
-    if (response.ok) {
-      setTitle('');
-      setContent('');
-      setCategory('');
-      onNoteAdded();
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/notes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ title, content, category })
+      });
+
+      if (response.ok) {
+        setTitle('');
+        setContent('');
+        setCategory('');
+        onNoteAdded();
+      } else {
+        alert('Failed to add note');
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,9 +62,14 @@ const NoteForm = ({ onNoteAdded }) => {
       />
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300"
+        className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300 flex items-center justify-center"
+        disabled={loading}
       >
-        Add Note
+        {loading ? (
+          <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+        ) : (
+          'Add Note'
+        )}
       </button>
     </form>
   );
